@@ -1,5 +1,6 @@
 package com.pm.patient_service.service;
 
+import com.pm.patient_service.dto.PatientRequestDTO;
 import com.pm.patient_service.dto.PatientResponseDTO;
 import com.pm.patient_service.mapper.PatientMapper;
 import com.pm.patient_service.model.Patient;
@@ -26,6 +27,15 @@ public class PatientService {
 
         return patientResponseDTOS;
 
+    }
+
+
+    public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO){
+
+        Patient patient = PatientMapper.toModel(patientRequestDTO);
+        Patient newPatient = patientRepository.save(patient);//in hibernate it used to return only id, primary key, not whole entity
+
+        return PatientMapper.toDTO(patient);
 
     }
 
