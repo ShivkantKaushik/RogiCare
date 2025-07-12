@@ -11,4 +11,8 @@ public interface PatientRepository extends JpaRepository<Patient, UUID> {
 
     boolean existsByEmail(String email);
 
+    // check if user exist with the provided email,
+    // but id should not be the one provided
+    //means some other user is also having same email
+    boolean existsByEmailIdNot(String email, UUID id);
 }

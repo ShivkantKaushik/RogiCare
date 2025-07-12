@@ -40,6 +40,8 @@ public class PatientController {
 
     }
 
+    //valid is for normal validation, validated is for advanced validation, where we can create groups
+    //and it will validate only for properties tagged with that group
 
     @PutMapping("/{id}")
     public ResponseEntity<PatientResponseDTO> updatePatient(@RequestParam("id") UUID id, @Validated({Default.class}) @RequestBody PatientRequestDTO patientRequestDTO){
@@ -50,6 +52,10 @@ public class PatientController {
 
     }
 
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePatient(@PathVariable UUID id) {
+        patientService.deletePatient(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
